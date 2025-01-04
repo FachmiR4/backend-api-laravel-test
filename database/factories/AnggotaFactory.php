@@ -19,8 +19,8 @@ class AnggotaFactory extends Factory
         return [
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
-                'no_hp' => fake()->number_format(),
-                'alamat' => fake()->sentence(),
+                'no_hp' => fake()->randomNumber(12, true),
+                'alamat' => fake()->sentence(2),
         ];
     }
 }
