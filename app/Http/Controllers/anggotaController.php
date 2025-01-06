@@ -94,7 +94,7 @@ class anggotaController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string',
-                'email' => 'required|string|unique:tbl_anggota',
+                'email' => 'required|string',
                 'no_hp' => 'required|string|max:13',
                 'alamat' => 'required|string'
             ]);
@@ -133,9 +133,14 @@ class anggotaController extends Controller
             } else {
                 return response()->json(['status' => 'Failed/Error', 'message' => 'Failed to delete'], 500);
             }
+            if ($responseData && isset($responseData['status']) && $responseData['status'] === 'Success') {
+                return redirect()->back()->with('success', 'Data successfully deleted.');
+            }
+
+            $errorMessage = isset($responseData['message']) ? $responseData['message'] : 'Unknown error occurred';
+            return redirect()->back()->with('error', $errorMessage);
         } catch (Exception $e) {
             return response()->json(['status' => 'Failed/Error', 'message' => $e->getMessage()], 500);
-            
         }
     }
 }   
