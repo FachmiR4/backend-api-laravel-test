@@ -19,7 +19,7 @@ class AnggotaFactory extends Factory
         return [
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
-                'no_hp' => fake()->randomNumber(12, true),
+                'no_hp' => fake()->numerify('###########'),
                 'alamat' => fake()->sentence(2),
         ];
     }
